@@ -13,7 +13,7 @@ public class Book extends Product {
         this.author = author;
     }
     public Book(String author){
-        this.author=author
+        this.author=author;
     }
 
     public boolean matches(String search) {
