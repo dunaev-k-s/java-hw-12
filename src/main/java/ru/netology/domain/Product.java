@@ -11,4 +11,9 @@ public class Product {
     private int id;
     private String title;
     private int price;
+
+    public boolean matches(String search){
+        if (title.contains(search)) return true;
+        return false;
+    }
 }

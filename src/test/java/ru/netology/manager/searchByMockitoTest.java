@@ -23,7 +23,7 @@ public class searchByMockitoTest {
     private Book two = new Book(2, "Green Light", 580, "Matthew McConaughey");
     private Book three = new Book(3, "War and piece", 10000, "Lev Tolstoy");
     private Book four = new Book(4, "Hangover", 620, "Charles Buckovsky");
-    private Book five = new Book(5, "On the bottom", 200, "Maksim Gorky");
+    private Book five = new Book(5, "On the bottom", 200, "Eight");
     private Smartphone six = new Smartphone(6, "Green Light", 3400, "Lev Tolstoy");
     private Smartphone seven = new Smartphone(7, "Mi9Lite", 10000, "Xiaomi");
     private Smartphone eight = new Smartphone(8, "Eight", 70000, "iPhone");
@@ -35,8 +35,8 @@ public class searchByMockitoTest {
         Product[] returned = new Product[]{one,two,three,four,five,six,seven,eight,nine,ten};
         doReturn(returned).when(repository).findAll();
 
-        Product[] actual = manager.searchBy("Green Light");
-        Product[] expected = new Product[]{two,six};
+        Product[] actual = manager.searchBy("Eight");
+        Product[] expected = new Product[]{five,eight};
 
         assertArrayEquals(actual,expected);
 

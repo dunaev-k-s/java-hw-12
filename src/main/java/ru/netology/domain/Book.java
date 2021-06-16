@@ -1,4 +1,5 @@
 package ru.netology.domain;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,4 +12,13 @@ public class Book extends Product {
         super(id, title, price);
         this.author = author;
     }
+    public Book(String author){
+        this.author=author
+    }
+
+    public boolean matches(String search) {
+        if (super.matches(search)) return true;
+        return author.contains(search);
+    }
+
 }
