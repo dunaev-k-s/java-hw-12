@@ -1,25 +1,13 @@
 package ru.netology.manager;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import ru.netology.domain.Book;
 import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
 
-@ExtendWith(MockitoExtension.class)
-public class searchByMockitoTest {
-    @Mock
-    private ProductRepository repository;
-    @InjectMocks
-    ProductManager manager = new ProductManager();
+public class removeByIdTest {
     private Book one = new Book(1, "A Promised Land", 3400, "Barak Obama");
     private Book two = new Book(2, "Green Light", 580, "Matthew McConaughey");
     private Book three = new Book(3, "War and piece", 10000, "Lev Tolstoy");
@@ -31,20 +19,16 @@ public class searchByMockitoTest {
     private Smartphone nine = new Smartphone(9, "1100", 100000, "Nokia");
     private Smartphone ten = new Smartphone(10, "Chebureck", 1000, "Alcatel");
 
+
     @Test
-    public void shouldBeSearchBy() {
-        Product[] returned = new Product[]{one,two,three,four,five,six,seven,eight,nine,ten};
-        doReturn(returned).when(repository).findAll();
+    public void shouldFindSevenById(){
+        ProductRepository repository = new ProductRepository();
+        repository.save(seven);
 
-        Product[] actual = manager.searchBy("Green Light");
-        Product[] expected = new Product[]{two,six};
+        Product actual = repository.findById(7);
+        Product expected = seven;
 
-        assertArrayEquals(actual,expected);
-
-        verify(repository).findAll();
+        assertEquals(actual,expected);
 
     }
-
-
-
 }
