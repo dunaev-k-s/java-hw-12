@@ -1,13 +1,16 @@
 package ru.netology.manager;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.Book;
 import ru.netology.domain.Product;
 import ru.netology.domain.Smartphone;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class removeByIdTest {
+    ProductRepository repository = new ProductRepository();
     private Book one = new Book(1, "A Promised Land", 3400, "Barak Obama");
     private Book two = new Book(2, "Green Light", 580, "Matthew McConaughey");
     private Book three = new Book(3, "War and piece", 10000, "Lev Tolstoy");
@@ -19,16 +22,40 @@ public class removeByIdTest {
     private Smartphone nine = new Smartphone(9, "1100", 100000, "Nokia");
     private Smartphone ten = new Smartphone(10, "Chebureck", 1000, "Alcatel");
 
+    @BeforeEach
+    public void setUp() {
+        repository.save(one);
+        repository.save(two);
+        repository.save(three);
+        repository.save(four);
+        repository.save(five);
+        repository.save(six);
+        repository.save(seven);
+        repository.save(eight);
+        repository.save(nine);
+        repository.save(ten);
+    }
+
 
     @Test
-    public void shouldFindSevenById(){
-        ProductRepository repository = new ProductRepository();
-        repository.save(seven);
+    public void shouldRemoveById() {
+        Product[] result = new Product[]{one, two, three, four, five, six, eight, nine, ten};
 
-        Product actual = repository.findById(7);
-        Product expected = seven;
+        repository.removeById(7);
 
-        assertEquals(actual,expected);
+        Product[] actual = repository.findAll();
+        Product[] expected = result;
+
+        assertArrayEquals(actual, expected);
 
     }
+
+    @Test
+    public void assertThrowUncheckedException() {
+
+        assertThrows(NotFoundException.class, () -> repository.removeById(20));
+
+    }
+
+
 }
